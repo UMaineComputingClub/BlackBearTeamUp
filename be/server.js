@@ -34,7 +34,7 @@ server.listen(Number(process.env.PORT), () => {
     console.log(`listening on *:${process.env.PORT}`)
 })
 
-app.get('/api/test', async (req, res) => {
+app.get('/', async (req, res) => {
     try {
         return res.status(200).send({ message: "Hello, browser!" })
     }
