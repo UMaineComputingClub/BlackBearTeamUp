@@ -15,30 +15,33 @@ function Login() {
     }
   };
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      {loggedIn ? (
-        <div>
-          <p>You are logged in!</p>
-          {/* Display a return value or any other content for the logged-in state */}
-        </div>
-      ) : (
-        <div>
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button onClick={handleLogin}>Login</button>
-        </div>
-      )}
+    <div id='page'>
+
+      <div className="login-container">
+        <h2>Login</h2>
+        {loggedIn ? (
+          <div>
+            <p>You are logged in!</p>
+            {/* Display a return value or any other content for the logged-in state */}
+          </div>
+        ) : (
+          <div>
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button onClick={handleLogin}>Login</button>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
