@@ -29,7 +29,7 @@ function Login() {
     <div id='page'>
 
       <div className="login-container">
-        <h2>Login</h2>
+        <h2>Black Bear Team Up Login</h2>
         {loggedIn ? (
           // login success page
           <div>
@@ -42,13 +42,13 @@ function Login() {
             <input
             type="text"
             placeholder="Username"
-            value={username} // change
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
             onFocus={() => setShowUsernameTooltip(true)}
             onBlur={() => setShowUsernameTooltip(false)}
           />
           {showUsernameTooltip && (
-            // change the tooltip text here
+            // change the username tooltip text here
             <div className="tooltip">Username: 'admin'</div>
           )}
           <input
@@ -60,7 +60,7 @@ function Login() {
             onBlur={() => setShowPasswordTooltip(false)}
           />
             {showPasswordTooltip && (
-              // change the tooltip text here
+              // change the password tooltip text here
               <div className="tooltip">Password: 'admin'</div>
             )}
             <button onClick={handleLogin}>Login</button>
