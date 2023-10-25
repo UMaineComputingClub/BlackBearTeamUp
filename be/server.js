@@ -79,7 +79,7 @@ app.post('/api/login', async (req, res) => {
         }
         // query database here
         if (req.body.username == 'admin' && req.body.password == 'admin') {
-            // a successful login message
+            // a match is found in database
             responseData.message = "Successful login"
             responseData.loggedIn = true
             responseData.session_token = "0"

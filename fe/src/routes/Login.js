@@ -15,7 +15,7 @@ function Login() {
   const [showPasswordTooltip, setShowPasswordTooltip] = useState(false);
 
 
-  async function handleLogin() {
+  async function requestLogin() {
 
     // the request to send to the backend
     const requestData = {
@@ -73,7 +73,7 @@ function Login() {
               // change the password tooltip text here
               <div className="tooltip">Password: 'admin'</div>
             )}
-            <button onClick={handleLogin}>Login</button>
+            <button onClick={requestLogin}>Login</button>
           </div>
         )}
       </div>
