@@ -60,3 +60,19 @@ app.post('/api/namefun', async (req, res) => {
         res.status(400).send({ message: e })
     }
 })
+
+app.post('/api/login', async (req, res) => {
+    try {
+
+        // check for filled in usernames and passwords
+        if (!(req.body.username && req.body.password))
+            return res.status(400).send({message: "Username and password must be filled in"})
+
+        
+        return res.status(200).send({message: "login!"})
+    }
+    catch (error) {
+
+        res.status(400).send({message: error})
+    }
+})

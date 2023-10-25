@@ -1,37 +1,79 @@
 import './Login.css'
 import React, { useState } from 'react'
+import { post } from 'Utils.js'
 
 function Login() {
-    const [val1, setVal1] = useState('')
-    const [val2, setVal2] = useState('')
+      // usernames and passwords
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  // logged in status
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  // Tooltips for usernames and passwords, could put password requirements here
+  const [showUsernameTooltip, setShowUsernameTooltip] = useState(false);
+  const [showPasswordTooltip, setShowPasswordTooltip] = useState(false);
 
 
-    async function Submit() {
-        alert(val1 + '   ' + val2)
+  async function handleLogin() {
+
+    // the request to send to the backend
+    const requestData = {
+        username: username,
+        password: password
     }
-    const change1 = event => {
-        setVal1(event.target.value)
 
+    try {
+        const response = await post('/api/login', requestData)
+        alert(response.message)
+    } catch (error) {
+        alert(`Error ${error.status}: ${error.message}`)
     }
-
-    const change2 = event => {
-        setVal2(event.target.value)
-
-    }
+  };
 
     return (
-        <div id='login-message'>
-            <h4>This is the login page!!</h4>
-            <form onSubmit={Submit} id='form'>
-                <label for='username'>Username:</label>
-                <input type='text' id='username' name='username' placeholder='user@email.com' value={val1} onChange={change1} />
+        <div id='page'>
 
-                <label for='password'>Password:</label>
-                <input type='text' id='password' name='password' placeholder='password' value={val2} onChange={change2} />
-
-                <input type='submit' value='Submit' id='submit' />
-            </form>
-        </div>
+      <div className="login-container">
+        <h2>Black Bear Team Up Login</h2>
+        {loggedIn ? (
+          // login success page
+          <div>
+            <p>You are logged in!</p>
+            {/*Return value for logged in state*/}
+          </div>
+        ) : (
+          // login page
+          <div>
+            <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            onFocus={() => setShowUsernameTooltip(true)}
+            onBlur={() => setShowUsernameTooltip(false)}
+          />
+          {showUsernameTooltip && (
+            // change the username tooltip text here
+            <div className="tooltip">Username: 'admin'</div>
+          )}
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onFocus={() => setShowPasswordTooltip(true)}
+            onBlur={() => setShowPasswordTooltip(false)}
+          />
+            {showPasswordTooltip && (
+              // change the password tooltip text here
+              <div className="tooltip">Password: 'admin'</div>
+            )}
+            <button onClick={handleLogin}>Login</button>
+          </div>
+        )}
+      </div>
+    </div>
     )
 }
 
