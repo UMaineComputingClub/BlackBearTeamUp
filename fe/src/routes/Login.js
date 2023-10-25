@@ -25,7 +25,11 @@ function Login() {
 
     try {
         const response = await post('/api/login', requestData)
-        alert(response.message)
+        if (response.loggedIn === true) {
+          setLoggedIn(true)
+        } else {
+          alert(response.message)
+        }
     } catch (error) {
         alert(`Error ${error.status}: ${error.message}`)
     }
