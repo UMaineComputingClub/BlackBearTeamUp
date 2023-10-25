@@ -64,7 +64,7 @@ app.post('/api/namefun', async (req, res) => {
 app.post('/api/login', async (req, res) => {
     try {
         
-        responseData = {
+        const responseData = {
             message: "",
             loggedIn: false,
             session_token: ""
@@ -77,7 +77,6 @@ app.post('/api/login', async (req, res) => {
             responseData.loggedIn = false
             return res.status(400).send(responseData)
         }
-
         // query database here
         if (req.body.username == 'admin' && req.body.password == 'admin') {
             // a successful login message
@@ -87,13 +86,12 @@ app.post('/api/login', async (req, res) => {
             return res.status(200).send(responseData)
         } else {
             // no match in database
-            responseData.message = "No account found"
+            responseData.message = "Incorrect username or password"
             responseData.loggedIn = false
             return res.status(400).send(responseData)
         }
     }
     catch (error) {
-
         res.status(400).send({message: error})
     }
 })
