@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv'
 dotenv.config()
-import express from 'express'
+import express, { response } from 'express'
 import cors from 'cors'
 import * as http from 'http'
 import session from 'express-session'
@@ -63,13 +63,34 @@ app.post('/api/namefun', async (req, res) => {
 
 app.post('/api/login', async (req, res) => {
     try {
+        
+        responseData = {
+            message: "",
+            loggedIn: false,
+            session_token: ""
+        }
 
         // check for filled in usernames and passwords
-        if (!(req.body.username && req.body.password))
-            return res.status(400).send({message: "Username and password must be filled in"})
+        if (!(req.body.username && req.body.password)) {
+            // no username or password
+            responseData.message = "Username and password must be filled in"
+            responseData.loggedIn = false
+            return res.status(400).send(responseData)
+        }
 
-        
-        return res.status(200).send({message: "login!"})
+        // query database here
+        if (req.body.username == 'admin' && req.body.password == 'admin') {
+            // a successful login message
+            responseData.message = "Successful login"
+            responseData.loggedIn = true
+            responseData.session_token = "0"
+            return res.status(200).send(responseData)
+        } else {
+            // no match in database
+            responseData.message = "No account found"
+            responseData.loggedIn = false
+            return res.status(400).send(responseData)
+        }
     }
     catch (error) {
 
