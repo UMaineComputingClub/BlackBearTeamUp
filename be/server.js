@@ -62,15 +62,19 @@ app.post('/api/namefun', async (req, res) => {
 })
 
 app.post('/api/login', async (req, res) => {
+
+    // this is the data to send back
+    const responseData = {
+        message: "", // any message for errors or fun
+        loggedIn: false, // whether the login was successful
+        user: "", // who logged in
+        session_token: "" // idk for the future maybe?
+    }
+
     try {
-        
-        const responseData = {
-            message: "",
-            loggedIn: false,
-            session_token: ""
-        }
 
         // check for filled in usernames and passwords
+        // should also check here for proper formatting
         if (!(req.body.username && req.body.password)) {
             // no username or password
             responseData.message = "Username and password must be filled in"
@@ -82,6 +86,7 @@ app.post('/api/login', async (req, res) => {
             // a match is found in database
             responseData.message = "Successful login"
             responseData.loggedIn = true
+            responseData.user = req.body.username
             responseData.session_token = "0"
             return res.status(200).send(responseData)
         } else {
@@ -92,6 +97,7 @@ app.post('/api/login', async (req, res) => {
         }
     }
     catch (error) {
-        res.status(400).send({message: error})
+        responseData.message = error
+        res.status(400).send(responseData)
     }
 })

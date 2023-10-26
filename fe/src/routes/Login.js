@@ -9,6 +9,7 @@ function Login() {
 
   // logged in status
   const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState('');
 
   // Tooltips for usernames and passwords, could put password requirements here
   const [showUsernameTooltip, setShowUsernameTooltip] = useState(false);
@@ -27,6 +28,7 @@ function Login() {
         const response = await post('/api/login', requestData)
         if (response.loggedIn === true) {
           setLoggedIn(true)
+          setUser(response.user)
         } else {
           alert(response.message)
         }
@@ -39,16 +41,17 @@ function Login() {
         <div id='page'>
 
       <div className="login-container">
-        <h2>Black Bear Team Up Login!!</h2>
+        <h2>This is the login page!!</h2>
         {loggedIn ? (
           // login success page
           <div>
-            <p>You are logged in!!!</p>
+            <p>You are logged in, {user}!!!</p>
             {/*Return value for logged in state*/}
           </div>
         ) : (
           // login page
           <div>
+            <h3>Username</h3>
             <input
             type="text"
             placeholder="Username"
@@ -61,6 +64,7 @@ function Login() {
             // change the username tooltip text here
             <div className="tooltip">Username: 'admin'</div>
           )}
+          <h3>Password</h3>
           <input
             type="password"
             placeholder="Password"
