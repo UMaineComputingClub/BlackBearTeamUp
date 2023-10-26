@@ -39,11 +39,11 @@ function Login() {
         <div id='page'>
 
       <div className="login-container">
-        <h2>Black Bear Team Up Login</h2>
+        <h2>Black Bear Team Up Login!!</h2>
         {loggedIn ? (
           // login success page
           <div>
-            <p>You are logged in!</p>
+            <p>You are logged in!!!</p>
             {/*Return value for logged in state*/}
           </div>
         ) : (
