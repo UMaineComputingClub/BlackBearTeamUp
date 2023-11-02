@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv'
 dotenv.config()
-import express from 'express'
+import express, { response } from 'express'
 import cors from 'cors'
 import * as http from 'http'
 import session from 'express-session'
@@ -58,5 +58,46 @@ app.post('/api/namefun', async (req, res) => {
     catch (e) {
         // if something goes horribly wrong, respond about that too
         res.status(400).send({ message: e })
+    }
+})
+
+app.post('/api/login', async (req, res) => {
+
+    // this is the data to send back
+    const responseData = {
+        message: "", // any message for errors or fun
+        loggedIn: false, // whether the login was successful
+        user: "", // who logged in
+        session_token: "" // idk for the future maybe?
+    }
+
+    try {
+
+        // check for filled in usernames and passwords
+        // should also check here for proper formatting
+        if (!(req.body.username && req.body.password)) {
+            // no username or password
+            responseData.message = "Username and password must be filled in"
+            responseData.loggedIn = false
+            return res.status(400).send(responseData)
+        }
+        // query database here
+        if (req.body.username == 'admin' && req.body.password == 'admin') {
+            // a match is found in database
+            responseData.message = "Successful login"
+            responseData.loggedIn = true
+            responseData.user = req.body.username
+            responseData.session_token = "0"
+            return res.status(200).send(responseData)
+        } else {
+            // no match in database
+            responseData.message = "Incorrect username or password"
+            responseData.loggedIn = false
+            return res.status(400).send(responseData)
+        }
+    }
+    catch (error) {
+        responseData.message = error
+        res.status(400).send(responseData)
     }
 })
