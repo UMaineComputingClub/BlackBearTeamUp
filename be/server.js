@@ -60,3 +60,21 @@ app.post('/api/namefun', async (req, res) => {
         res.status(400).send({ message: e })
     }
 })
+
+
+app.post('/api/login', async (req, res) => {
+    try {
+        //if the uasername or password is not submitted there needs to be a warning
+        if (!req.body.username) {
+            return res.status(400).send({ message: `username is mandatory` })
+        } else if (!req.body.password) {
+            return res.status(400).send({ message: `password is mandatory` })
+        } else {
+            return res.status(200).send({ message: `your username is: ${req.body.username} your password is: ${req.body.password}` })
+        }
+    }
+    catch (e) {
+        // if something goes horribly wrong, respond about that too
+        res.status(400).send({ message: e})
+    }
+})
