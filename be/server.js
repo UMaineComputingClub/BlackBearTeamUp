@@ -5,6 +5,24 @@ import cors from 'cors'
 import * as http from 'http'
 import session from 'express-session'
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyA03rnRgSgBafBXx8166E-MA6N0JI_huxs",
+    authDomain: "teamup-71d39.firebaseapp.com",
+    projectId: "teamup-71d39",
+    storageBucket: "teamup-71d39.appspot.com",
+    messagingSenderId: "84760428579",
+    appId: "1:84760428579:web:37a563f22f52dc9ceab196"
+};
+
+// Initialize Firebase
+const firebase = initializeApp(firebaseConfig);
+
 // set up express app
 const app = express()
 app.set('trust proxy', 1)
