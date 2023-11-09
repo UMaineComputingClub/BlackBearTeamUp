@@ -3,15 +3,16 @@ import React, { useState } from 'react'
 import { post } from 'Utils.js'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from 'firebase.js'
+import { useContext } from 'react'
+import { UserContext } from "Session"
 
 function Login() {
-    // usernames and passwords
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+
+    // shared context
+    const { username, setUsername } = useContext(UserContext)
 
     // logged in status
     const [loggedIn, setLoggedIn] = useState(false)
-    const [user, setUser] = useState('')
 
     // Tooltips for usernames and passwords, could put password requirements here
     const [showUsernameTooltip, setShowUsernameTooltip] = useState(false)
@@ -19,12 +20,15 @@ function Login() {
 
     async function requestSignUp() {
         try {
+            const email = document.getElementById('email').value
+            const password = document.getElementById('password').value
+
             // Create a new user with Firebase Authentication
-            const userCredential = await createUserWithEmailAndPassword(auth, username, password)
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password)
 
             // If sign-up is successful, update state
             setLoggedIn(true)
-            setUser(userCredential.user.email)
+            setUsername(userCredential.user.email)
         } catch (error) {
             // If sign-up fails, show an alert with the error message
             alert(`Error: ${error.message}`)
@@ -33,12 +37,15 @@ function Login() {
 
     async function requestLogin() {
         try {
+            const email = document.getElementById('email').value
+            const password = document.getElementById('password').value
+
             // Sign in the user with Firebase Authentication
-            const userCredential = await signInWithEmailAndPassword(auth, username, password)
+            const userCredential = await signInWithEmailAndPassword(auth, email, password)
 
             // If login is successful, update state
             setLoggedIn(true)
-            setUser(userCredential.user.email)
+            setUsername(userCredential.user.email)
         } catch (error) {
             // If login fails, show an alert with the error message
             alert(`Error: ${error.message}`)
@@ -70,7 +77,7 @@ function Login() {
                 {loggedIn ? (
                     // login success page
                     <div>
-                        <p>You are logged in, {user}!!!</p>
+                        <p>You are logged in, {username}!!!</p>
                         {/* Return value for logged in state */}
                     </div>
                 ) : (
@@ -80,8 +87,7 @@ function Login() {
                         <input
                             type="text"
                             placeholder="Username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            id="email"
                             onFocus={() => setShowUsernameTooltip(true)}
                             onBlur={() => setShowUsernameTooltip(false)}
                         />
@@ -93,8 +99,7 @@ function Login() {
                         <input
                             type="password"
                             placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            id="password"
                             onFocus={() => setShowPasswordTooltip(true)}
                             onBlur={() => setShowPasswordTooltip(false)}
                         />
