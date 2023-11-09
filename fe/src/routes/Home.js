@@ -1,8 +1,13 @@
 import './Home.css'
 // check out Utils.js to see the code for these shorthand HTTP requests (done via the fetch function)
 import { post } from 'Utils.js'
+import logo from "./images/bear.png"
+//import {BsFillBookmarkFill} from "react-icons/bs"
+import user from "./images/user.png"
 
 function Home() {
+
+    
 
     // marking the function as async allows for "await" statements
     async function postTest() {
@@ -22,6 +27,7 @@ function Home() {
 
             // once the server has sent a response, the postTest function will continue
             alert(response.message)
+
         }
         catch (e) {
             alert(`Error ${e.status}: ${e.message}`)
@@ -30,9 +36,7 @@ function Home() {
 
     return (
         <div>
-            This is the home page!!
-            <br />
-            <button onClick={postTest}>post request example</button>
+            <button onClick={postTest}>Post</button>
         </div>
     )
 }
