@@ -36,22 +36,7 @@ function Home() {
 
     return (
         <div>
-            <header>
-                <img src={logo} alt="graphic of a bear" />
-                <h1>BBT</h1>
-                <nav>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Search</a></li>
-                        <li><a href="#">Profile</a></li>
-                        <li><button onClick={postTest}>Post</button></li>
-                    </ul>
-                </nav>
-                <div id="user">
-                    <img src={user} alt="none" class="round" />
-                </div>
-                <div class="unfloat"></div>
-            </header>
+            <button onClick={postTest}>Post</button>
         </div>
     )
 }

@@ -1,0 +1,87 @@
+:root{
+    --color_1:#ffffff;
+    --color_2: #d2d2d2;
+    --color_3:#838383;
+    --color_4: black;
+}
+
+body{
+    background-color: var(--color_2);
+}
+
+header{
+    background-color: var(--color_1);
+    box-shadow: 0 2px  5px var(--color_3);
+}
+
+header img {
+    width: 100px;
+    float:left;
+    margin: 10px;
+}
+h1{ 
+   display: inline-block;
+}
+
+nav{ 
+    width: 70%;
+    display: inline-block;
+    text-align: center;
+    /* float: none;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    /* display: inline-block;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center; */
+}
+
+nav ul{
+    list-style: none;
+    padding-left: 0;
+}
+
+nav ul li{
+    display:inline-block;
+}
+
+nav ul li a:hover{
+    background-color: var(--color_2);
+    border-radius: 5px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--color_4);
+    padding: 10px;
+    margin: 0 5px;
+}
+
+.round{
+    width: 80px;
+    height: 80px;
+    /*https://ianrmedia.unl.edu/resources/rounded-corners-images#:~:text=The%20CSS%20property%20border%2Dradius,an%20oval%20or%20a%20circle.*/
+    border-radius: 50%;
+}
+
+#user {
+    float: right;
+}
+
+.unfloat {
+    clear: both;
+}
+
+@media (max-width: 1000px){
+    nav{
+        width: 60%;
+    }
+}
+
+@media (max-width: 700px){
+    nav{
+        width: 40%;
+    }
+    /*make the nav into a hamburger menu*/
+}
