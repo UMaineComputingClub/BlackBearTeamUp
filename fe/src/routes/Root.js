@@ -2,12 +2,19 @@ import { Outlet } from 'react-router-dom'
 import './Root.css'
 import logo from "./images/bear.png"
 import user from "./images/user.png"
+import { useContext } from 'react'
+import { UserContext } from "Session"
+
 
 export default function Root() {
+
+    const { username } = useContext(UserContext)
+
     return (
         <>
             {/* all the other elements */}
             <div id='detail'>
+
                 <header>
                 <img src={logo} alt="graphic of a bear" />
                 <h1>BBT</h1>
@@ -24,6 +31,8 @@ export default function Root() {
                 <div class="unfloat"></div>
             </header>
             <Outlet />
+                <span>{username}</span>
+                <Outlet />
             </div>
         </>
     )
