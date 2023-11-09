@@ -1,9 +1,32 @@
 import './Home.css'
 // check out Utils.js to see the code for these shorthand HTTP requests (done via the fetch function)
 import { post } from 'Utils.js'
+import { collection, addDoc, doc, getDoc } from "firebase/firestore"; 
+import { database } from 'firebase.js';
 
 function Home() {
 
+
+    async function dataAddTest() {
+        const name = prompt('Enter a name')
+        const number = +prompt('Enter any number')
+
+        try {
+            const docRef = await addDoc(collection(database, "test"), {
+              name: name,
+              number: number
+            });
+            console.log("Document written with ID: ", docRef.id);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
+    }
+
+    async function dataGetTest() {
+        const name = prompt('Enter a name')
+        const docRef = doc(database, "test", "name");
+
+    }
     // marking the function as async allows for "await" statements
     async function postTest() {
         const name = prompt(`Hey, what's your name?`)
@@ -33,6 +56,7 @@ function Home() {
             This is the home page!!
             <br />
             <button onClick={postTest}>post request example</button>
+            <button onClick={dataAddTest}>Add to database</button>
         </div>
     )
 }
