@@ -3,10 +3,15 @@ import React, { useState } from 'react'
 import { post } from 'Utils.js'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from 'firebase.js'
+import { useContext } from 'react'
+import { UserContext } from "Session"
 
 function Login() {
+
+    const { username, setUsername } = useContext(UserContext)
+
     // usernames and passwords
-    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     // logged in status
@@ -20,7 +25,7 @@ function Login() {
     async function requestSignUp() {
         try {
             // Create a new user with Firebase Authentication
-            const userCredential = await createUserWithEmailAndPassword(auth, username, password)
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password)
 
             // If sign-up is successful, update state
             setLoggedIn(true)
@@ -34,10 +39,11 @@ function Login() {
     async function requestLogin() {
         try {
             // Sign in the user with Firebase Authentication
-            const userCredential = await signInWithEmailAndPassword(auth, username, password)
+            const userCredential = await signInWithEmailAndPassword(auth, email, password)
 
             // If login is successful, update state
             setLoggedIn(true)
+            setUsername(email)
             setUser(userCredential.user.email)
         } catch (error) {
             // If login fails, show an alert with the error message
@@ -80,8 +86,8 @@ function Login() {
                         <input
                             type="text"
                             placeholder="Username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             onFocus={() => setShowUsernameTooltip(true)}
                             onBlur={() => setShowUsernameTooltip(false)}
                         />
