@@ -20,20 +20,19 @@ export default function Root() {
                 <h1>BBT</h1>
                 <nav>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Search</a></li>
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/">Search</a></li>
+                        <li><a href="/">Profile</a></li>
                     </ul>
                 </nav>
                 <div id="user">
                     <img src={user} alt="none" class="round" />
                 </div>
                 <div class="unfloat"></div>
-            </header>
-            <Outlet />
                 <span>{username}</span>
-                <Outlet />
+            </header>
             </div>
+            <Outlet />
         </>
     )
 }
