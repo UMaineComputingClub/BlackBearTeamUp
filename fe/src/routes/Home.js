@@ -1,9 +1,7 @@
 import './Home.css'
 // check out Utils.js to see the code for these shorthand HTTP requests (done via the fetch function)
 import { post } from 'Utils.js'
-import logo from "./images/bear.png"
 //import {BsFillBookmarkFill} from "react-icons/bs"
-import user from "./images/user.png"
 
 function Home() {
 
