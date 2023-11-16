@@ -1,10 +1,10 @@
 // add_user.js
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
-import { db } from "./firebase";
+import { database } from "./firebase";
 
 const makeUser = async (email, name) => {
     try {
-        const docRef = await addDoc(collection(db, "users"), {
+        const docRef = await addDoc(collection(database, "users"), {
             email: email,
             name: name,
             postIds: [],
@@ -20,7 +20,7 @@ const makeUser = async (email, name) => {
 
 const updateUser = async (username, updates) => {
     try {
-        const userRef = doc(db, "users", username);
+        const userRef = doc(database, "users", username);
         await updateDoc(userRef, updates);
 
         console.log("Document updated successfully");

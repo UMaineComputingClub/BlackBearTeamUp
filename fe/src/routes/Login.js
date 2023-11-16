@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { auth } from 'firebase.js'
 import { useContext } from 'react'
 import { UserContext } from "Session"
+import { makeUser } from 'add_user.js'
 // import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -25,6 +26,8 @@ function Login() {
         try {
             const email = document.getElementById('email').value
             const password = document.getElementById('password').value
+
+            await makeUser(email, 'Johnathan')
 
             // Create a new user with Firebase Authentication
             const userCredential = await createUserWithEmailAndPassword(auth, email, password)
