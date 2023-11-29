@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { auth } from 'firebase.js'
 import { useContext } from 'react'
 import { UserContext } from "Session"
+// import { useNavigate } from "react-router-dom";
 
 function Login() {
 
@@ -17,6 +18,8 @@ function Login() {
     // Tooltips for usernames and passwords, could put password requirements here
     const [showUsernameTooltip, setShowUsernameTooltip] = useState(false)
     const [showPasswordTooltip, setShowPasswordTooltip] = useState(false)
+
+    // const navigate = useNavigate();
 
     async function requestSignUp() {
         try {
@@ -46,6 +49,7 @@ function Login() {
             // If login is successful, update state
             setLoggedIn(true)
             setUsername(userCredential.user.email)
+            //navigate("/Home")
         } catch (error) {
             // If login fails, show an alert with the error message
             alert(`Error: ${error.message}`)

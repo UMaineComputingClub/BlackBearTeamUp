@@ -2,11 +2,16 @@ import './Home.css'
 // check out Utils.js to see the code for these shorthand HTTP requests (done via the fetch function)
 import { post } from 'Utils.js'
 //import {BsFillBookmarkFill} from "react-icons/bs"
+// import { useContext } from 'react'
+// import { UserContext } from "Session"
+import { getAuth } from "firebase/auth";
 
 
 function Home() {
 
-    
+    // const { username } = useContext(UserContext)
+    const auth = getAuth();
+    const user = auth.currentUser;
 
     // marking the function as async allows for "await" statements
     async function postTest() {
